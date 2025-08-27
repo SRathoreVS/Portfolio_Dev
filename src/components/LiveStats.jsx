@@ -8,12 +8,20 @@ export default function LiveStats({ messageSentTrigger }) {
   const [messagesSent, setMessagesSent] = useState(0);
   const [linesOfCode] = useState(125000);
 
-  // Increment page views on page load
+  // Load initial data from localStorage
   useEffect(() => {
     const storedViews = parseInt(localStorage.getItem("pageViews") || "0");
+    const storedMessages = parseInt(
+      localStorage.getItem("messagesSent") || "0"
+    );
+
+    // Increment page views
     const newViews = storedViews + 1;
     setPageViews(newViews);
+    setMessagesSent(storedMessages);
+
     localStorage.setItem("pageViews", newViews.toString());
+    localStorage.setItem("messagesSent", storedMessages.toString());
   }, []);
 
   // Increment messages sent when trigger changes

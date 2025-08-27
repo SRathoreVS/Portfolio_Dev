@@ -5,11 +5,11 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 
 export default function About() {
   const { t } = useTranslation();
 
-  // ✅ Set your start date of professional career
   const { years, months, days } = calculateExperience("2022-01-01");
 
   return (
@@ -41,15 +41,35 @@ export default function About() {
 
           <Paper elevation={1} sx={{ p: 2 }}>
             <Typography variant="subtitle2">Contact</Typography>
-            <Typography variant="body2" sx={{ mt: 1 }}>
+            <Typography
+              variant="body2"
+              sx={{ mt: 1, display: "flex", flexDirection: "column", gap: 1 }}
+            >
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
-              <br />
               {profile.phone}
-              <br />
-              <a href={profile.linkedin} target="_blank" rel="noreferrer">
-                LinkedIn
-              </a>
             </Typography>
+
+            <Box sx={{ mt: 2, display: "flex", gap: 2 }}>
+              <Button
+                variant="outlined"
+                color="primary"
+                component="a"
+                href={profile.linkedin}
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                component="a"
+                href="/SatyamRathore_Resume.pdf"
+                download
+              >
+                Download Resume
+              </Button>
+            </Box>
           </Paper>
         </Box>
       </Container>

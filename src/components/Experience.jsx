@@ -20,7 +20,7 @@ export default function Experience() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Filter by company or title…"
-          className=" p-2 rounded-md border border-gray-300 
+          className="w-2/5 p-2 rounded-md border border-gray-300 
              text-slate-800 dark:text-slate-200 
              bg-white dark:bg-gray-800"
           aria-label="Filter experience"

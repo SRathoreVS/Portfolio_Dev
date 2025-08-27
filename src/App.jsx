@@ -7,6 +7,7 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import BackgroundAnimation from "./components/BackgroundAnimation"; // 🔹 new
+import AIExpertise from "./components/AIExpertise";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <About />
         <Experience />
         <Skills />
+        <AIExpertise />
         <Projects />
         <Contact />
       </main>

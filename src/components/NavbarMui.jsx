@@ -51,6 +51,7 @@ export default function NavbarMui() {
           <Button href="#about">{t("nav.about")}</Button>
           <Button href="#experience">{t("nav.experience")}</Button>
           <Button href="#projects">{t("nav.projects")}</Button>
+          <Button href="#aiexpertise">AI Expertise</Button>
           <Button href="#contact">{t("nav.contact")}</Button>
         </Box>
 

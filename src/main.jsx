@@ -9,18 +9,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { getTheme } from "./theme.jsx";
 
 function Root() {
-  const [mode, setMode] = useState("dark");
-  const theme = getTheme(mode);
-
-  useEffect(() => {
-    document.body.classList.remove("light", "dark");
-    document.body.classList.add(mode);
-  }, [mode]);
+  const theme = getTheme();
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App mode={mode} setMode={setMode} />
+      <App />
     </ThemeProvider>
   );
 }

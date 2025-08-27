@@ -10,7 +10,6 @@ export default function HeroMui() {
   return (
     <section id="hero">
       <Container maxWidth="lg" sx={{ py: 12, textAlign: "center" }}>
-        {/* Animated Profile Image */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}

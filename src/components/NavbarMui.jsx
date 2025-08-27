@@ -11,7 +11,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useTranslation } from "react-i18next";
 
-export default function NavbarMui({ mode, setMode }) {
+export default function NavbarMui() {
   const { t, i18n } = useTranslation();
   const [lang, setLang] = React.useState(i18n.language || "en");
 
@@ -19,10 +19,6 @@ export default function NavbarMui({ mode, setMode }) {
     const v = ev.target.value;
     setLang(v);
     i18n.changeLanguage(v);
-  };
-
-  const toggleMode = () => {
-    setMode(mode === "dark" ? "light" : "dark");
   };
 
   return (
@@ -52,18 +48,10 @@ export default function NavbarMui({ mode, setMode }) {
         <Box sx={{ flexGrow: 1 }} />
 
         <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-          <Button href="#about" color="inherit">
-            {t("nav.about")}
-          </Button>
-          <Button href="#experience" color="inherit">
-            {t("nav.experience")}
-          </Button>
-          <Button href="#projects" color="inherit">
-            {t("nav.projects")}
-          </Button>
-          <Button href="#contact" color="inherit">
-            {t("nav.contact")}
-          </Button>
+          <Button href="#about">{t("nav.about")}</Button>
+          <Button href="#experience">{t("nav.experience")}</Button>
+          <Button href="#projects">{t("nav.projects")}</Button>
+          <Button href="#contact">{t("nav.contact")}</Button>
         </Box>
 
         {/* Language select */}
@@ -76,10 +64,6 @@ export default function NavbarMui({ mode, setMode }) {
           <MenuItem value="en">EN</MenuItem>
           <MenuItem value="hi">हिन्दी</MenuItem>
         </Select>
-
-        <IconButton onClick={toggleMode} color="inherit">
-          {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
-        </IconButton>
       </Toolbar>
     </AppBar>
   );

@@ -8,12 +8,12 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import BackgroundAnimation from "./components/BackgroundAnimation"; // 🔹 new
 
-export default function App({ mode, setMode }) {
+export default function App() {
   return (
     <div>
       <BackgroundAnimation />
 
-      <Navbar mode={mode} setMode={setMode} />
+      <Navbar />
       <main>
         <Hero />
         <About />

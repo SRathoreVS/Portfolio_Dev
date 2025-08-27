@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { profile } from "../data/resumeData";
 
-export default function Contact() {
+export default function Contact({ onMessageSent }) {
   const { t } = useTranslation();
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -24,7 +24,6 @@ export default function Contact() {
     const subject = `Message from ${formData.name}`;
     const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
 
-    // ✅ Force Gmail web compose
     const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${
       profile.email
     }&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -34,6 +33,10 @@ export default function Contact() {
     setFormData({ name: "", email: "", message: "" });
     setShowForm(false);
     setShowSuccess(true);
+
+    // ✅ Increment LiveStats messages
+    if (onMessageSent) onMessageSent();
+
     setTimeout(() => setShowSuccess(false), 3000);
   };
 
@@ -64,7 +67,6 @@ export default function Contact() {
         </a>
       </div>
 
-      {/* Feedback Form */}
       {showForm && (
         <form
           onSubmit={handleSubmit}
@@ -79,8 +81,7 @@ export default function Contact() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full mb-4 px-3 py-2 rounded-lg border border-slate-300 
-                       dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+            className="w-full mb-4 px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
           />
 
           <label className="block mb-2 font-medium text-slate-800 dark:text-slate-200">
@@ -92,8 +93,7 @@ export default function Contact() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full mb-4 px-3 py-2 rounded-lg border border-slate-300 
-                       dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+            className="w-full mb-4 px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
           />
 
           <label className="block mb-2 font-medium text-slate-800 dark:text-slate-200">
@@ -105,8 +105,7 @@ export default function Contact() {
             value={formData.message}
             onChange={handleChange}
             required
-            className="w-full mb-4 px-3 py-2 rounded-lg border border-slate-300 
-                       dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+            className="w-full mb-4 px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
           />
 
           <button
@@ -118,7 +117,6 @@ export default function Contact() {
         </form>
       )}
 
-      {/* ✅ Success Popup */}
       {showSuccess && (
         <div className="absolute top-6 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-bounce">
           <span className="text-2xl">✅</span>

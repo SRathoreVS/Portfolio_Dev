@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ring: 0 0% 100%;
+}
+
+/* Smooth scroll for in-page nav */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fancy gradient text helper */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-teal-300;
+}
+
+/* Card hover */
+.card-hover {
+  @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-glow;
+}
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+:root {
+  --gradient-light: linear-gradient(90deg, #0284c7, #0ea5e9, #06b6d4);
+  --gradient-dark: linear-gradient(90deg, #38bdf8, #22d3ee, #14b8a6);
+}
+
+body.light .gradient-text {
+  background-image: var(--gradient-light);
+}
+body.dark .gradient-text {
+  background-image: var(--gradient-dark);
+}
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientMove 15s ease infinite;
+}

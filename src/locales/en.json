@@ -1,0 +1,23 @@
+{
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Frontend Developer Specialist",
+    "subtitle": "I build fast, accessible, and delightful web apps.",
+    "cta": "View Experience"
+  },
+  "about": {
+    "headline": "Hello, I'm Satyam Rathore",
+    "body": "Frontend Developer with 3.8+ years of experience building responsive, high-performance web apps using React.js, JavaScript (ES6+), HTML5, and modern CSS. Skilled in UI/UX development, API integration, JWT authentication, accessibility, and performance optimization. Experienced in Agile teams, writing reusable code, and delivering scalable features."
+  },
+  "contact": {
+    "cta": "Email Me",
+    "copy": "Copy Email",
+    "copied": "Email copied!"
+  }
+}

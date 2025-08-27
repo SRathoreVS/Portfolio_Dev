@@ -71,6 +71,7 @@ export const skills = {
   testing: ["Jest", "Cypress"],
   charts: ["Highcharts"],
   design: ["Figma", "Chrome DevTools"],
+  learning: ["DSA in Javascript", "React in deep", "future(python)"],
 };
 
 export const projects = [

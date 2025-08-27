@@ -6,9 +6,6 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import IconButton from "@mui/material/IconButton";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useTranslation } from "react-i18next";
 
 export default function NavbarMui() {
@@ -33,13 +30,18 @@ export default function NavbarMui() {
       }}
     >
       <Toolbar sx={{ maxWidth: 1200, mx: "auto", width: "100%", gap: 2 }}>
+        {/* Clickable Title */}
         <Typography
           variant="h6"
+          component="a"
+          href="/"
           sx={{
             fontWeight: 800,
             background: "linear-gradient(90deg,#0ea5e9,#06b6d4)",
             WebkitBackgroundClip: "text",
             color: "transparent",
+            textDecoration: "none",
+            cursor: "pointer",
           }}
         >
           Satyam • SR
@@ -47,10 +49,11 @@ export default function NavbarMui() {
 
         <Box sx={{ flexGrow: 1 }} />
 
+        {/* Nav Buttons */}
         <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
           <Button href="#about">{t("nav.about")}</Button>
           <Button href="#experience">{t("nav.experience")}</Button>
-          <Button href="#projects">{t("nav.projects")}</Button>
+          <Button href="#skills">{t("nav.skills")}</Button>
           <Button href="#aiexpertise">AI Expertise</Button>
           <Button href="#contact">{t("nav.contact")}</Button>
         </Box>

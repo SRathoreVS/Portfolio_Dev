@@ -13,7 +13,7 @@
   },
   "about": {
     "headline": "नमस्ते, मैं सत्याम राठौर हूँ",
-    "body": "फ्रंटएंड डेवलपर, 3.8+ वर्षों के अनुभव के साथ, React.js, JavaScript, HTML5 और CSS का उपयोग कर आधुनिक वेब ऐप्स बनाने में निपुण।"
+    "body": "मैं एक Frontend Developer हूँ, जिसके पास <strong>{{years}} साल, {{months}} महीने और {{days}} दिन</strong> का अनुभव है responsive, high-performance वेब एप्लिकेशन बनाने में React.js, JavaScript (ES6+), HTML5, और आधुनिक CSS का उपयोग करते हुए। UI/UX डेवलपमेंट, API इंटीग्रेशन, JWT ऑथेंटिकेशन, accessibility, और performance optimization में कुशल। Agile टीमों में काम करने का अनुभव, reusable कोड लिखने और scalable फीचर्स deliver करने में दक्ष।"
   },
   "contact": {
     "cta": "ईमेल करें",

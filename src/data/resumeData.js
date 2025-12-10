@@ -91,19 +91,38 @@ export const projects = [
     description:
       "Modern personal portfolio built with React and Tailwind CSS, showcasing my experience, skills, projects, and live stats with a focus on clean UX and subtle animations.",
     live: "https://satyam-rathore-fdev.netlify.app/",
-    // Add GitHub link here if you want a GitHub button to show:
-    // github: "https://github.com/...",
     tech: ["React", "Tailwind CSS", "Framer Motion", "EmailJS"],
-    image: "/projects/portfolio.png", // create this screenshot later
+    image: "/projects/portfolio.png", // optional screenshot path
+    type: "featured",
   },
   {
     name: "FinGen – AI Finance Landing Page",
     description:
-      "Responsive landing page for an AI-powered finance product, featuring hero sections, feature highlights, pricing, and CTA blocks with a premium SaaS-style UI.",
+      "Responsive landing page for an AI-powered finance product, featuring hero sections, feature highlights, and CTA-driven layout with a premium fintech look.",
     live: "https://fingen-landing-ui.vercel.app/",
-    // github: "https://github.com/...", // optional
     tech: ["React", "Tailwind CSS", "Framer Motion"],
-    image: "/projects/fingen.png", // create this screenshot later
+    image: "/projects/fingen.png", // optional screenshot path
+    type: "landing",
   },
+  {
+    name: "Omnifood – Healthy Meal Subscription",
+    description:
+      "Landing UI for a smart 365-days-per-year food subscription that delivers healthy meals tailored to personal tastes and nutritional needs, with a strong focus on responsive layout and modern marketing design.",
+    live: "https://omnifood-rathore.netlify.app/",
+    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    image: "/projects/omnifood.png", // optional screenshot path
+    type: "landing",
+  },
+  {
+    name: "WinWin Dice – Pig Game",
+    description:
+      "Two-player dice game where players race to reach 100 points. Each player can roll the dice multiple times to accumulate a round score, but rolling a 1 loses the round score and switches the turn. Players can 'Hold' to add the round score to their total and pass the turn strategically.",
+    live: "https://rathore-dice-winwin.netlify.app/",
+    tech: ["JavaScript", "HTML5", "CSS3"],
+    image: "/projects/winwin-dice.png", // optional screenshot path
+    type: "game",
+  },
+  // type: "fullstack" will be added in future
 ];
+
 

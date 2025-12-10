@@ -1,155 +1,143 @@
-import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useTranslation } from "react-i18next";
+import React, { useEffect, useState } from "react";
+
+const NAV_ITEMS = [
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+];
 
 export default function NavbarMui() {
-  const { t, i18n } = useTranslation();
-  const [lang, setLang] = React.useState(i18n.language || "en");
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("#hero");
 
-  // Mobile menu state
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setScrolled(offset > 10);
 
-  const handleLang = (ev) => {
-    const v = ev.target.value;
-    setLang(v);
-    i18n.changeLanguage(v);
+      const sections = [
+        "hero",
+        "about",
+        "experience",
+        "skills",
+        "projects",
+        "contact",
+      ];
+      let current = "#hero";
+
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const top = el.offsetTop - 120;
+        if (offset >= top) {
+          current = `#${id}`;
+        }
+      });
+
+      setActive(current);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleNavClick = (href) => {
+    setIsOpen(false);
+    const el = document.querySelector(href);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
   };
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  // central nav items to keep DRY
-  const navItems = [
-    { label: t("nav.about"), href: "#about" },
-    { label: t("nav.experience"), href: "#experience" },
-    { label: t("nav.skills"), href: "#skills" },
-    { label: "AI Expertise", href: "#aiexpertise" },
-    { label: t("nav.contact"), href: "#contact" },
-  ];
 
   return (
-    <AppBar
-      position="sticky"
-      elevation={0}
-      sx={{
-        zIndex: (theme) => theme.zIndex.drawer + 1,
-        borderBottom: "1px solid",
-        borderColor: "divider",
-        bgcolor: "background.paper",
-      }}
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "backdrop-blur bg-slate-950/80 border-b border-white/10 shadow-lg/30"
+          : "bg-transparent"
+      }`}
     >
-      <Toolbar sx={{ maxWidth: 1200, mx: "auto", width: "100%", gap: 2 }}>
-        {/* Clickable Title */}
-        <Typography
-          variant="h6"
-          component="a"
-          href="/"
-          sx={{
-            fontWeight: 800,
-            background: "linear-gradient(90deg,#0ea5e9,#06b6d4)",
-            WebkitBackgroundClip: "text",
-            color: "transparent",
-            textDecoration: "none",
-            cursor: "pointer",
-          }}
+      <nav className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Logo / Name */}
+        <button
+          onClick={() => handleNavClick("#hero")}
+          className="text-lg font-bold tracking-tight bg-gradient-to-r from-sky-400 to-cyan-300 bg-clip-text text-transparent"
         >
           Satyam • SR
-        </Typography>
+        </button>
 
-        <Box sx={{ flexGrow: 1 }} />
-
-        {/* Desktop nav buttons */}
-        <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-          {navItems.map((item) => (
-            <Button key={item.href} href={item.href}>
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center gap-6">
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.href}
+              onClick={() => handleNavClick(item.href)}
+              className={`relative text-sm font-medium transition-colors ${
+                active === item.href
+                  ? "text-sky-300"
+                  : "text-slate-300 hover:text-white"
+              }`}
+            >
               {item.label}
-            </Button>
+              {active === item.href && (
+                <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gradient-to-r from-sky-400 to-cyan-300 rounded-full" />
+              )}
+            </button>
           ))}
-        </Box>
 
-        {/* Mobile menu button (visible on xs / sm) */}
-        <Box sx={{ display: { xs: "flex", md: "none" } }}>
-          <IconButton
-            size="large"
-            aria-label="open navigation menu"
-            aria-controls={anchorElNav ? "nav-menu" : undefined}
-            aria-haspopup="true"
-            onClick={handleOpenNavMenu}
+          <a
+            href="#contact"
+            className="ml-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-400 text-slate-950 text-sm font-semibold px-4 py-2 shadow-lg hover:shadow-sky-500/25 transition-shadow"
           >
-            <MenuIcon />
-          </IconButton>
+            Let&apos;s work together
+          </a>
+        </div>
 
-          <Menu
-            id="nav-menu"
-            anchorEl={anchorElNav}
-            open={Boolean(anchorElNav)}
-            onClose={handleCloseNavMenu}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-          >
-            {navItems.map((item) => (
-              <MenuItem
+        {/* Mobile menu button */}
+        <button
+          className="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-full border border-white/15 bg-slate-900/70"
+          onClick={() => setIsOpen((o) => !o)}
+          aria-label="Toggle navigation"
+        >
+          <div className="space-y-1.5">
+            <span className="block w-4 h-0.5 bg-white" />
+            <span className="block w-4 h-0.5 bg-white" />
+          </div>
+        </button>
+      </nav>
+
+      {/* Mobile dropdown */}
+      {isOpen && (
+        <div className="md:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur">
+          <div className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2">
+            {NAV_ITEMS.map((item) => (
+              <button
                 key={item.href}
-                component="a"
-                href={item.href}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleNavClick(item.href)}
+                className={`text-left py-2 text-sm ${
+                  active === item.href
+                    ? "text-sky-300 font-semibold"
+                    : "text-slate-300"
+                }`}
               >
                 {item.label}
-              </MenuItem>
+              </button>
             ))}
-
-            {/* Language selector inside mobile menu */}
-            <Box sx={{ px: 2, pt: 1 }}>
-              <Select
-                size="small"
-                value={lang}
-                onChange={(ev) => {
-                  handleLang(ev);
-                  // don't close menu on language change so user can confirm
-                }}
-                sx={{ minWidth: 120 }}
-              >
-                <MenuItem value="en">EN</MenuItem>
-                <MenuItem value="hi">हिन्दी</MenuItem>
-              </Select>
-            </Box>
-          </Menu>
-        </Box>
-
-        {/* Language select for desktop (hidden on small screens) */}
-        <Box sx={{ display: { xs: "none", md: "block" } }}>
-          <Select
-            size="small"
-            value={lang}
-            onChange={handleLang}
-            sx={{ minWidth: 90 }}
-          >
-            <MenuItem value="en">EN</MenuItem>
-            <MenuItem value="hi">हिन्दी</MenuItem>
-          </Select>
-        </Box>
-      </Toolbar>
-    </AppBar>
+            <a
+              href="#contact"
+              onClick={() => setIsOpen(false)}
+              className="mt-2 inline-flex justify-center rounded-full bg-gradient-to-r from-sky-500 to-cyan-400 text-slate-950 text-sm font-semibold px-4 py-2"
+            >
+              Let&apos;s work together
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
   );
 }

@@ -1,52 +1,52 @@
 import { experience } from "../data/resumeData";
-import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function Experience() {
-  const [query, setQuery] = useState("");
-  const items = useMemo(() => {
-    if (!query) return experience;
-    const q = query.toLowerCase();
-    return experience.filter(
-      (e) =>
-        e.company.toLowerCase().includes(q) || e.title.toLowerCase().includes(q)
-    );
-  }, [query]);
-
   return (
-    <section id="experience" className="max-w-6xl mx-auto px-4 py-16">
-      <div className="flex items-end justify-between gap-4">
-        <h2 className="text-2xl font-semibold gradient-text">Experience</h2>
-        <input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Filter by company or title…"
-          className="w-2/5 p-2 rounded-md border border-gray-300 
-             text-slate-800 dark:text-slate-200 
-             bg-white dark:bg-gray-800"
-          aria-label="Filter experience"
-        />
-      </div>
-      <div className="mt-6 grid gap-4">
-        {items.map((item, idx) => (
-          <article
-            key={idx}
-            className="rounded-2xl border border-white/10 p-5 bg-white/5 card-hover"
-          >
-            <div className="flex items-center justify-between gap-2">
-              <h3 className="text-lg font-semibold">
-                {item.title} • {item.company}
-              </h3>
-              <div className="text-sm text-slate-400">{item.period}</div>
-            </div>
-            <ul className="mt-3 grid gap-2 list-disc pl-5 marker:text-sky-300">
-              {item.points.map((p, i) => (
-                <li key={i} className="text-slate-400dark:text-slate-300">
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
+    <section id="experience" className="max-w-6xl mx-auto px-4 py-20">
+      <motion.h2
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl font-semibold gradient-text mb-10 text-center"
+      >
+        Experience Timeline
+      </motion.h2>
+
+      <div className="relative pl-6 md:pl-12">
+        {/* Vertical Line */}
+        <div className="absolute top-0 left-3 md:left-6 w-1 h-full bg-gradient-to-b from-sky-500 to-cyan-500 rounded-full"></div>
+
+        <div className="space-y-16">
+          {experience.map((exp, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -25 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              {/* Bullet */}
+              <div className="absolute -left-[11px] md:-left-[14px] w-6 h-6 rounded-full bg-sky-500 border-2 border-slate-950"></div>
+
+              <div className="glass-card p-6 rounded-2xl hover:border-sky-400/50 transition-colors">
+                <div className="flex justify-between items-center gap-3">
+                  <h3 className="text-lg font-semibold text-white">
+                    {exp.title} • {exp.company}
+                  </h3>
+                  <span className="text-xs text-slate-400">{exp.period}</span>
+                </div>
+
+                <ul className="mt-3 space-y-1 marker:text-sky-400 list-disc pl-5 text-sm text-slate-300">
+                  {exp.points.map((point, idx) => (
+                    <li key={idx}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

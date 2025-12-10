@@ -1,73 +1,91 @@
-import { useTranslation, Trans } from "react-i18next";
 import { profile } from "../data/resumeData";
-import { calculateExperience } from "../utils/experience";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
+import { motion } from "framer-motion";
 
 export default function About() {
-  const { t } = useTranslation();
-  const { years, months, days } = calculateExperience("2022-01-01");
-
   return (
-    <section id="about">
-      <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Typography variant="h4" gutterBottom>
-          {t("nav.about")}
-        </Typography>
+    <section id="about" className="max-w-6xl mx-auto px-4 py-20">
+      <motion.h2
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl font-semibold gradient-text mb-12 text-center"
+      >
+        About Me
+      </motion.h2>
 
-        <Box
-          display="grid"
-          gap={4}
-          gridTemplateColumns={{ xs: "1fr", md: "2fr 1fr" }}
+      <div className="grid md:grid-cols-3 gap-10">
+        {/* Main bio */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="md:col-span-2 space-y-4 text-slate-300 text-sm md:text-base"
         >
-          <Typography
-            variant="body1"
-            sx={{ color: "text.primary", lineHeight: 1.7 }}
-          >
-            <Trans
-              i18nKey="about.body"
-              values={{ years, months, days }}
-              components={{ strong: <strong /> }}
-            />
-          </Typography>
+          <p>
+            {profile.summary ||
+              "Frontend Developer dedicated to building performant, accessible and visually polished web interfaces using React and modern JavaScript."}
+          </p>
 
-          <Paper elevation={1} sx={{ p: 2 }}>
-            <Typography variant="subtitle2">{t("nav.contact")}</Typography>
-            <Typography
-              variant="body2"
-              sx={{ mt: 1, display: "flex", flexDirection: "column", gap: 1 }}
-            >
-              <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          <p>
+            I enjoy translating complex requirements into simple, usable
+            experiences and collaborating closely with designers, backend
+            engineers, and stakeholders. My focus is on clean architecture,
+            reusable components, and a smooth end-user experience.
+          </p>
+
+          <p>
+            Outside of work, I keep improving my skills with DSA in JavaScript
+            and deep-diving into advanced React patterns to stay ahead with
+            modern frontend practices.
+          </p>
+        </motion.div>
+
+        {/* Compact info column (no CTA buttons here) */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="glass-card p-6 rounded-2xl flex flex-col gap-3 text-sm text-slate-200"
+        >
+          <h3 className="text-lg font-semibold mb-1">Quick details</h3>
+          <div className="space-y-2">
+            <div>
+              <span className="font-semibold text-sky-300">Name: </span>
+              {profile.name}
+            </div>
+            <div>
+              <span className="font-semibold text-sky-300">Role: </span>
+              {profile.role}
+            </div>
+            {/* You said you’ll change the experience text yourself, so keep this easy to edit */}
+            <div>
+              <span className="font-semibold text-sky-300">Experience: </span>
+              3.8+ years (update as needed)
+            </div>
+            <div>
+              <span className="font-semibold text-sky-300">Location: </span>
+              {profile.location}
+            </div>
+            <div>
+              <span className="font-semibold text-sky-300">Phone: </span>
               {profile.phone}
-            </Typography>
-
-            <Box sx={{ mt: 2, display: "flex", gap: 2 }}>
-              <Button
-                variant="outlined"
-                color="primary"
-                component="a"
-                href={profile.linkedin}
-                target="_blank"
-                rel="noreferrer"
+            </div>
+            <div>
+              <span className="font-semibold text-sky-300">Email: </span>
+              <a
+                href={`mailto:${profile.email}`}
+                className="underline hover:text-sky-200"
               >
-                LinkedIn
-              </Button>
-              <Button
-                variant="outlined"
-                color="secondary"
-                component="a"
-                href="/SatyamRathore_Resume.pdf"
-                download
-              >
-                {t("hero.cta")}
-              </Button>
-            </Box>
-          </Paper>
-        </Box>
-      </Container>
+                {profile.email}
+              </a>
+            </div>
+          </div>
+          <p className="mt-3 text-xs text-slate-400">
+            For opportunities and collaborations, you can use the contact form
+            or reach out on LinkedIn from the hero section.
+          </p>
+        </motion.div>
+      </div>
     </section>
   );
 }

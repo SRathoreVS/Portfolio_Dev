@@ -53,3 +53,14 @@ body.dark .gradient-text {
   background-size: 200% 200%;
   animation: gradientMove 15s ease infinite;
 }
+.gradient-text {
+  background: linear-gradient(90deg, #0ea5e9, #22c55e);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.glass-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  backdrop-filter: blur(18px);
+}

@@ -22,21 +22,26 @@ export default function About() {
           className="md:col-span-2 space-y-4 text-slate-300 text-sm md:text-base"
         >
           <p>
-            {profile.summary ||
-              "Frontend Developer dedicated to building performant, accessible and visually polished web interfaces using React and modern JavaScript."}
+            Frontend Developer Specialist with almost 4 years of experience
+            building secure, scalable, and high-performance web applications in
+            the banking domain. Skilled in React.js, TypeScript, JavaScript
+            (ES6+), HTML5, CSS3, and modern UI frameworks.
           </p>
 
           <p>
-            I enjoy translating complex requirements into simple, usable
-            experiences and collaborating closely with designers, backend
-            engineers, and stakeholders. My focus is on clean architecture,
-            reusable components, and a smooth end-user experience.
+            I focus on creating modular, reusable UI components and seamless
+            user journeys with a strong emphasis on API integration,
+            authentication flows, accessibility (WCAG 2.1), performance
+            optimization, and CI/CD pipelines. I enjoy translating complex
+            requirements into simple, usable experiences while collaborating
+            closely with designers, backend engineers, and stakeholders.
           </p>
 
           <p>
-            Outside of work, I keep improving my skills with DSA in JavaScript
-            and deep-diving into advanced React patterns to stay ahead with
-            modern frontend practices.
+            I am comfortable working in Agile environments, using cloud and
+            DevOps tools, and writing scalable, testable code. Currently, I am
+            improving my problem-solving skills through Data Structures and
+            Algorithms (DSA) in Java and strengthening my Core Java knowledge.
           </p>
         </motion.div>
 
@@ -57,10 +62,9 @@ export default function About() {
               <span className="font-semibold text-sky-300">Role: </span>
               {profile.role}
             </div>
-            {/* You said you’ll change the experience text yourself, so keep this easy to edit */}
             <div>
               <span className="font-semibold text-sky-300">Experience: </span>
-              3.8+ years (update as needed)
+              Almost 4 years
             </div>
             <div>
               <span className="font-semibold text-sky-300">Location: </span>

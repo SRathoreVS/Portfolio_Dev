@@ -91,7 +91,7 @@ export default function HeroMui() {
             className="mt-4 grid grid-cols-3 max-w-md gap-3 text-xs text-slate-300"
           >
             <div>
-              <div className="text-lg font-semibold text-sky-300">3+</div>
+              <div className="text-lg font-semibold text-sky-300">4.5+</div>
               <div>Years of experience</div>
             </div>
             <div>
@@ -100,7 +100,7 @@ export default function HeroMui() {
             </div>
             <div>
               <div className="text-lg font-semibold text-emerald-300">100%</div>
-              <div>Frontend focused</div>
+              <div>Frontend / Full Stack focused</div>
             </div>
           </motion.div>
         </div>

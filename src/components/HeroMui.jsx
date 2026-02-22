@@ -24,7 +24,7 @@ export default function HeroMui() {
             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-900/60 px-3 py-1 text-xs text-sky-200"
           >
             <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            Available for Frontend / React roles
+            Available for Frontend /Full-Stack / JAVA + React roles
           </motion.div>
 
           <motion.h1
@@ -37,7 +37,7 @@ export default function HeroMui() {
               {profile.name || "Satyam Rathore"}
             </span>
             <span className="mt-2 block bg-gradient-to-r from-sky-400 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">
-              Frontend Developer • React & UI Engineering
+              Full-Stack Developer • React & Core-JAVA Engineering
             </span>
           </motion.h1>
 
@@ -47,10 +47,7 @@ export default function HeroMui() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-slate-300 max-w-xl text-sm md:text-base"
           >
-            I craft fast, accessible, and visually polished interfaces using
-            React, JavaScript, and modern UI systems. From landing pages to full
-            dashboards, I focus on clean UX, smooth animations, and production-
-            ready code.
+           I build fast, scalable, and accessible web applications using React for intuitive user interfaces and Java for robust, enterprise-grade backends. From landing pages to complex dashboards, I prioritize clean UX, smooth animations, and production-ready architecture.
           </motion.p>
 
           {/* CTA buttons */}

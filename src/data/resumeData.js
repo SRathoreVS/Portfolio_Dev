@@ -1,28 +1,37 @@
 export const profile = {
   name: "Satyam Rathore",
-  role: "Frontend Developer Specialist",
+  role: "Java React FullStack Developer",
   phone: "+91-6394614898",
   email: "priyasatyam1806@gmail.com",
-  location: "Mumbai, India",
+  location: "Mumbai || Pune, India",
   summary:
-    "Frontend Developer with almost 4 years of experience delivering secure, scalable, and high-performance applications in the banking domain. Skilled in React.js, TypeScript, secure authentication flows, accessibility (WCAG 2.1), performance optimization, and CI/CD practices. Experienced collaborating in Agile environments and building modular, reusable, and testable UI components.",
+    "🚀 Full-Stack Web Developer | React.js & Java | with 4.5 years of experience building and maintaining scalable web applications using Java, Spring Boot, React.js, and RESTful APIs. Hands-on in developing secure and high-performing systems across both frontend and backend layers. Experienced in microservices, JWT authentication, and CI/CD pipelines. Skilled in Java-based backend development, API integration, and frontend architecture with React.js and TypeScript. Adept at Agile collaboration and currently enhancing expertise in Java and backend frameworks.",
   linkedin: "https://www.linkedin.com/in/satyam-rathore-ba3471154/",
 };
 
 
 export const experience = [
   {
+    company: "Infosys Limited",
+    title: "Full Stack Developer",
+    period: "Jan 2026 – Present",
+    points: [
+      "Working for UBS client .......... still under KT sessions"
+    ],
+  },
+  {
     company: "Accenture",
-    title: "Frontend Developer Specialist",
+    title: "Full Stack Developer",
     period: "Feb 2025 – Present",
     points: [
-      "Developed responsive and modular UI components for holdings and investment & security custodial modules using React.js, TypeScript, and Styled Components.",
+      "Developed and maintained microservice based Java backend modules for portfolio and investment features using Spring Boot, JPA, and REST APIs.",
       "Improved accessibility with WCAG 2.1 compliance using NVDA, Lighthouse audits, ARIA roles, and semantic HTML.",
-      "Integrated RESTful APIs with JWT-based authentication, OTP login & multilingual support (SE, FI, EN) using i18n.",
-      "Built and optimized trading workflows including buy/sell, dividend, redemption with Highcharts dashboards.",
-      "Worked with CI/CD pipelines on Bitbucket and GitHub to automate builds, testing, and deployment processes.",
-      "Refactored legacy class-based components to functional with React Hooks, improving maintainability.",
-      "Enhanced performance via lazy-loading, code-splitting and caching strategies.",
+      "Built responsive UI components using React.js, TypeScript, Styled Components, and integrated with backend APIs.",
+      "Implemented JWT-based authentication, multilingual support (SE, FI, EN) via i18n, and secure data handling between UI and backend.",
+      "Designed and consumed APIs for stock trading (buy/sell, deposit/withdraw) and built dashboards with Highcharts.",
+      "nhanced backend logic for transactions, validations, and audit logging using Java + SQL.",
+      "Configured CI/CD pipelines using Jenkins, Maven, and Docker for automated build and deployments.",
+      "Collaborated across Agile sprints, performing code reviews, unit testing (Jest, JUnit), and maintaining code quality with SonarQube.",
     ],
   },
   {
@@ -57,6 +66,8 @@ export const skills = {
   backend: [
     { name: "Node.js", icon: "/icons/nodejs.svg" },
     { name: "Express.js", icon: "/icons/express.svg" },
+    { name: "Java", icon: "/icons/java.svg" },
+    { name: "Spring Boot", icon: "/icons/spring.svg" },
     { name: "REST APIs", icon: "/icons/rest-api.svg" },
     { name: "JWT Auth", icon: "/icons/jwt.svg" },
     { name: "MongoDB", icon: "/icons/mongodb.svg" },
@@ -94,6 +105,15 @@ export const projects = [
     tech: ["React", "Tailwind CSS", "Framer Motion", "EmailJS"],
     image: "/projects/portfolio.png", // optional screenshot path
     type: "featured",
+  },
+  {
+    name: "Harbourstone Realty – Real Estate Landing Page",
+    description:
+      "Responsive landing page for a real estate agency, featuring service highlights, property showcases, client testimonials, contact form, and a professional property-focused layout.",
+    live: "https://harbourstonerealty.netlify.app/",
+    tech: ["HTML", "CSS", "JavaScript", "React Js", "Typescript ", "Netlify"],
+    image: "/projects/harbourstone.png", // optional screenshot path
+    type: "landing",
   },
   {
     name: "FinGen – AI Finance Landing Page",

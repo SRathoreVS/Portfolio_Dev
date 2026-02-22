@@ -22,10 +22,7 @@ export default function About() {
           className="md:col-span-2 space-y-4 text-slate-300 text-sm md:text-base"
         >
           <p>
-            Frontend Developer Specialist with almost 4 years of experience
-            building secure, scalable, and high-performance web applications in
-            the banking domain. Skilled in React.js, TypeScript, JavaScript
-            (ES6+), HTML5, CSS3, and modern UI frameworks.
+            🚀 Full-Stack Web Developer | React.js & Java | with 4.5 years of experience building and maintaining scalable web applications using Java, Spring Boot, React.js, and RESTful APIs. Hands-on in developing secure and high-performing systems across both frontend and backend layers. Experienced in microservices, JWT authentication, and CI/CD pipelines. Skilled in Java-based backend development, API integration, and frontend architecture with React.js and TypeScript. Adept at Agile collaboration and currently enhancing expertise in Java and backend frameworks.
           </p>
 
           <p>
@@ -64,7 +61,7 @@ export default function About() {
             </div>
             <div>
               <span className="font-semibold text-sky-300">Experience: </span>
-              Almost 4 years
+               4.5+ years
             </div>
             <div>
               <span className="font-semibold text-sky-300">Location: </span>

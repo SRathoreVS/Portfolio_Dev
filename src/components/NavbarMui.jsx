@@ -56,7 +56,7 @@ export default function NavbarMui() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
           ? "backdrop-blur-xl bg-slate-950/70 border-b border-white/10 shadow-lg"
           : "bg-transparent"

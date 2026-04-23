@@ -11,35 +11,101 @@ export const profile = {
 
 export const experience = [
   {
-    company: "Accenture",
-    title: "Full Stack Developer",
-    period: "Feb 2023 – Present",
+    company: "Infosys Limited",
+    title: "Senior Associate Consultant / Full Stack Developer",
+    period: "Jan 2026 – Present",
     points: [
-      "Developed microservice-based backend systems using Java, Spring Boot, and REST APIs for financial applications.",
-      "Built scalable frontend modules using React.js and TypeScript with strong focus on performance and accessibility.",
-      "Implemented JWT-based authentication and secure API communication.",
-      "Designed dashboards for stock trading workflows with Highcharts.",
-      "Improved accessibility compliance (WCAG 2.1) using ARIA roles and semantic HTML.",
-      "Configured CI/CD pipelines using Jenkins, Docker, and Maven.",
+      "Led modernization of legacy banking platforms (UBS client) by transforming monolithic systems into modular React-based architecture, improving maintainability and scalability.",
+      "Improved application performance by ~35–50% using React optimizations such as memoization, lazy loading, and efficient rendering strategies.",
+      "Designed reusable component libraries, accelerating development speed by ~40% across teams.",
+      "Built dynamic, data-intensive financial interfaces, improving workflow efficiency and reducing user interaction friction.",
+      "Standardized API contracts between frontend and backend, reducing integration issues and improving delivery timelines.",
+      "Optimized backend APIs (Node.js / Core Java services) to enhance frontend performance, improving response time by ~30%."
+    ],
+  },
+
+  {
+    company: "Accenture",
+    title: "Frontend / Full Stack Developer",
+    period: "Mar 2025 – Jan 2026",
+    points: [
+      "Developed responsive and scalable UI components using React.js, Styled Components, and modern frontend practices in Agile environments.",
+      "Integrated secure authentication systems using JWT and OTP-based verification for financial applications.",
+      "Built trading workflows including buy/sell, deposit/withdraw modules with mobile PIN-based authentication.",
+      "Implemented high-performance dashboards using Highcharts with dynamic filtering and CSV export functionality.",
+      "Developed multilingual support (SE, FI, EN) for banking platforms using localization libraries.",
+      "Configured CI/CD pipelines using Jenkins, SonarQube, Docker, and Kubernetes for automated deployments.",
+      "Maintained code quality with SonarQube and contributed across Agile lifecycle (Epics → Sprints → Tasks)."
     ],
   },
   {
-    company: "Tata Consultancy Services",
-    title: "Software Developer",
-    period: "Jan 2022 – Feb 2023",
+    company: "Tata Consultancy Services (TCS)",
+    title: "Frontend Developer",
+    period: "Dec 2021 – Feb 2025",
     points: [
-      "Built reusable UI components using React and Redux across multiple enterprise projects.",
-      "Implemented role-based authentication and secure API integrations.",
-      "Optimized performance using memoization and caching strategies.",
-      "Collaborated in Agile teams with code reviews and sprint planning.",
+      "Developed responsive, pixel-perfect UI using HTML5, CSS3, JavaScript, and modern frameworks like Tailwind and Bootstrap.",
+      "Integrated frontend applications with REST APIs to enable real-time data updates and seamless client-server communication.",
+      "Built backend APIs using Node.js and Express to support frontend features and data operations.",
+      "Improved performance and debugging efficiency using Chrome DevTools and frontend optimization techniques.",
+      "Collaborated with designers to translate UI/UX mockups into scalable, maintainable interfaces.",
+      "Used Git for version control and managed branching strategies for team collaboration.",
+      "Worked on banking domain projects (Nordea Bank), developing UI systems for document and data workflows.",
+      "Implemented client-side validations and ensured robust user input handling."
     ],
   },
 ];
 
 export const skills = {
-  frontend: ["React", "TypeScript", "Redux", "Tailwind", "HTML", "CSS"],
-  backend: ["Node.js", "Java", "Spring Boot", "REST APIs", "MongoDB", "SQL"],
-  tools: ["Git", "Jenkins", "Postman", "Swagger", "SonarQube", "JIRA"],
+  frontend: [
+    { name: "React", icon: "/icons/react.svg" },
+    { name: "TypeScript", icon: "/icons/typescript.svg" },
+    { name: "Redux Toolkit", icon: "/icons/redux-toolkit.svg" },
+    { name: "JavaScript", icon: "/icons/javascript.svg" },
+    { name: "HTML5", icon: "/icons/html5.svg" },
+    { name: "CSS3", icon: "/icons/css3.svg" },
+    { name: "Tailwind CSS", icon: "/icons/tailwindcss.svg" },
+    { name: "Styled Components", icon: "/icons/styled-components.svg" },
+    { name: "Responsive Design", icon: "/icons/responsive-design.svg" },
+  ],
+
+  backend: [
+    { name: "Node.js", icon: "/icons/nodejs.svg" },
+    { name: "Express.js", icon: "/icons/express.svg" },
+    { name: "Core Java", icon: "/icons/java.svg" },
+    { name: "Spring Boot", icon: "/icons/spring.svg" },
+    { name: "REST APIs", icon: "/icons/rest-api.svg" },
+    { name: "JWT Authentication", icon: "/icons/jwt.svg" },
+    { name: "MongoDB", icon: "/icons/mongodb.svg" },
+    { name: "SQL", icon: "/icons/sql.svg" },
+  ],
+
+  tools: [
+    { name: "Git", icon: "/icons/git.svg" },
+    { name: "GitHub / Bitbucket", icon: "/icons/github-bitbucket.svg" },
+    { name: "Jenkins", icon: "/icons/jenkins.svg" },
+    { name: "Azure DevOps", icon: "/icons/azure-devops.svg" },
+    { name: "Postman", icon: "/icons/postman.svg" },
+    { name: "Swagger", icon: "/icons/swagger.svg" },
+    { name: "SonarQube", icon: "/icons/sonarqube.svg" },
+    { name: "JIRA", icon: "/icons/jira.svg" },
+    { name: "VS Code", icon: "/icons/vscode.svg" },
+  ],
+
+  testing: [
+    { name: "Jest", icon: "/icons/jest.svg" },
+    { name: "Cypress", icon: "/icons/cypress.svg" },
+    { name: "Chrome DevTools", icon: "/icons/chrome-devtools.svg" },
+    { name: "Lighthouse", icon: "/icons/lighthouse.svg" },
+  ],
+
+  visualization: [
+    { name: "Highcharts", icon: "/icons/highcharts.svg" },
+    { name: "Figma", icon: "/icons/figma.svg" },
+  ],
+
+  quality: [
+    { name: "Accessibility (A11y)", icon: "/icons/accessibility.svg" },
+  ],
 };
 
 export const projects = [

@@ -24,16 +24,13 @@ export default function App() {
   return (
     <div className="relative bg-[#0b0f19] text-white overflow-x-hidden">
 
-      {/* Background */}
-      <div className="fixed inset-0 -z-10">
-        <BackgroundAnimation />
-      </div>
+      <BackgroundAnimation />
 
       {/* Navbar */}
       <Navbar />
 
       {/* Main */}
-     <main className="flex flex-col gap-12 md:gap-16 px-6 md:px-12 lg:px-20">
+      <main className="flex flex-col px-6 md:px-12 lg:px-20">
 
         <Suspense fallback={<SectionLoader />}>
 
@@ -43,10 +40,6 @@ export default function App() {
 
           <SectionWrapper id="about">
             <About />
-          </SectionWrapper>
-
-          <SectionWrapper id="stats">
-            <LiveStats messageSentTrigger={messageSentTrigger} />
           </SectionWrapper>
 
           <SectionWrapper id="experience">
@@ -65,15 +58,16 @@ export default function App() {
             <Projects />
           </SectionWrapper>
 
-          {/* ✅ NEW SUPPORT SECTION */}
-          <SectionWrapper id="support">
-            <Support />
-          </SectionWrapper>
 
           <SectionWrapper id="contact">
             <Contact onMessageSent={handleMessageSent} />
           </SectionWrapper>
 
+          {/* ✅ NEW SUPPORT SECTION */}
+          <SectionWrapper id="support">
+            <Support />
+
+          </SectionWrapper>
         </Suspense>
 
       </main>
@@ -88,7 +82,7 @@ function SectionWrapper({ children, id }) {
   return (
     <section
       id={id}
-      className="py-16 md:py-20 scroll-mt-24"
+      className="min-h-screen flex items-center justify-center "
     >
       <div className="w-full max-w-7xl">
         {children}

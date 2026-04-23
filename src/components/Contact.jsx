@@ -8,14 +8,22 @@ export default function Contact({ onMessageSent }) {
   const [status, setStatus] = useState({ type: "", message: "" });
   const [loading, setLoading] = useState(false);
 
+  const SERVICE_ID = "service_7d3mkf9";
+  const TEMPLATE_ID = "template_gx3c0dm";
+  const PUBLIC_KEY = "SAqxCqiMlUDgWe0r8";
+
+  // 🎉 Confetti Animation
+  const fireConfetti = () => {
+    const duration = 2500;
+    const end = Date.now() + duration;
+
+    const colors = ["#38bdf8", "#0ea5e9", "#22c55e"];
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     setStatus({ type: "", message: "" });
-
-    const SERVICE_ID = "your_service_id";
-    const TEMPLATE_ID = "your_template_id";
-    const PUBLIC_KEY = "your_public_key";
 
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY).then(
       () => {
@@ -40,7 +48,6 @@ export default function Contact({ onMessageSent }) {
 
   return (
     <section id="contact" className="max-w-7xl mx-auto px-4 py-24">
-
       <div className="grid md:grid-cols-2 gap-12 items-start">
 
         {/* LEFT SIDE */}
@@ -61,7 +68,6 @@ export default function Contact({ onMessageSent }) {
             let’s connect.
           </p>
 
-          {/* CONTACT INFO */}
           <div className="space-y-3 text-sm">
             <p className="text-slate-300">
               <span className="text-sky-300 font-medium">Email:</span>{" "}
@@ -85,6 +91,29 @@ export default function Contact({ onMessageSent }) {
               </a>
             </p>
 
+            <p className="text-slate-300 flex items-center gap-2">
+              <span className="text-sky-300 font-medium">WhatsApp:</span>
+
+              <a
+                href="https://wa.me/916394614898"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-green-400 hover:text-green-300 transition"
+              >
+                {/* WhatsApp Icon */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 32 32"
+                  className="w-5 h-5"
+                  fill="currentColor"
+                >
+                  <path d="M16 .4C7.4.4.4 7.4.4 16c0 2.8.7 5.5 2.1 7.9L0 32l8.3-2.4c2.3 1.2 4.9 1.9 7.7 1.9 8.6 0 15.6-7 15.6-15.6S24.6.4 16 .4zm0 28.4c-2.4 0-4.7-.7-6.7-1.9l-.5-.3-4.9 1.4 1.4-4.8-.3-.5C4 20.7 3.4 18.4 3.4 16 3.4 9.6 9.6 3.4 16 3.4S28.6 9.6 28.6 16 22.4 28.8 16 28.8z" />
+                </svg>
+
+                6394614898
+              </a>
+            </p>
+
             <p className="text-slate-300">
               <span className="text-sky-300 font-medium">Location:</span>{" "}
               {profile.location}
@@ -92,7 +121,7 @@ export default function Contact({ onMessageSent }) {
           </div>
         </motion.div>
 
-        {/* RIGHT SIDE (FORM) */}
+        {/* RIGHT SIDE */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -105,7 +134,6 @@ export default function Contact({ onMessageSent }) {
 
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
 
-            {/* NAME */}
             <div>
               <label className="text-sm text-slate-400">Your Name</label>
               <input
@@ -116,7 +144,6 @@ export default function Contact({ onMessageSent }) {
               />
             </div>
 
-            {/* EMAIL */}
             <div>
               <label className="text-sm text-slate-400">Your Email</label>
               <input
@@ -127,7 +154,6 @@ export default function Contact({ onMessageSent }) {
               />
             </div>
 
-            {/* MESSAGE */}
             <div>
               <label className="text-sm text-slate-400">Message</label>
               <textarea
@@ -138,7 +164,6 @@ export default function Contact({ onMessageSent }) {
               />
             </div>
 
-            {/* BUTTON */}
             <button
               type="submit"
               disabled={loading}
@@ -151,15 +176,16 @@ export default function Contact({ onMessageSent }) {
           {/* STATUS */}
           {status.message && (
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className={`mt-5 text-sm px-4 py-2 rounded-lg ${
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className={`mt-5 text-sm px-4 py-3 rounded-xl border flex items-center gap-2 ${
                 status.type === "success"
-                  ? "bg-emerald-500/10 text-emerald-300 border border-emerald-400/30"
-                  : "bg-red-500/10 text-red-300 border border-red-400/30"
+                ? "bg-emerald-500/10 text-emerald-300 border-emerald-400/30"
+                : "bg-red-500/10 text-red-300 border-red-400/30"
               }`}
             >
-              {status.message}
+              {status.type === "success" ? "🎉" : "⚠️"}
+              <span>{status.message}</span>
             </motion.div>
           )}
         </motion.div>

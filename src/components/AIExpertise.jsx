@@ -6,7 +6,7 @@ import CodeIcon from "@mui/icons-material/Code";
 
 export default function AIExpertise() {
   return (
-    <section id="aiexpertise" className="max-w-6xl mx-auto px-4 py-16">
+    <section id="aiexpertise" className="max-w-6xl mx-auto px-4">
       <h2 className="text-2xl font-semibold gradient-text">
         I am well-versed in working with AIs
       </h2>

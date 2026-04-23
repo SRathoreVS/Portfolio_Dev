@@ -33,7 +33,7 @@ export default function App() {
       <Navbar />
 
       {/* Main */}
-      <main className="flex flex-col gap-24 px-6 md:px-12 lg:px-20">
+     <main className="flex flex-col gap-12 md:gap-16 px-6 md:px-12 lg:px-20">
 
         <Suspense fallback={<SectionLoader />}>
 
@@ -88,7 +88,7 @@ function SectionWrapper({ children, id }) {
   return (
     <section
       id={id}
-      className="min-h-screen flex items-center justify-center scroll-mt-24"
+      className="py-16 md:py-20 scroll-mt-24"
     >
       <div className="w-full max-w-7xl">
         {children}

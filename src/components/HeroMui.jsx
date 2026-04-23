@@ -1,25 +1,33 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { profile } from "../data/resumeData";
+import Hero3DScene from "./Hero3DScene";
 
 export default function HeroMui() {
+  const { scrollY } = useScroll();
+
+  // subtle scroll motion (Replit-like feel)
+  const y = useTransform(scrollY, [0, 500], [0, 80]);
+
   return (
     <section
       id="hero"
-      className="relative overflow-hidden border-b border-white/5"
+      className="relative overflow-hidden min-h-screen flex items-center"
     >
-      {/* Background Glow */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-40 -right-20 w-[420px] h-[420px] bg-sky-500/25 blur-[120px] rounded-full" />
-        <div className="absolute -bottom-40 -left-20 w-[420px] h-[420px] bg-cyan-500/20 blur-[120px] rounded-full" />
+      {/* 🔥 Glow Background (depth effect) */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute w-[500px] h-[500px] bg-sky-500/20 blur-[140px] rounded-full top-[-120px] left-[20%]" />
+        <div className="absolute w-[400px] h-[400px] bg-cyan-400/10 blur-[120px] rounded-full bottom-[-100px] right-[10%]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-20 md:py-28 flex flex-col md:flex-row items-center gap-16">
-
+      <motion.div
+        style={{ y }}
+        className="max-w-7xl mx-auto px-4 py-20 md:py-28 flex flex-col md:flex-row items-center gap-16 w-full"
+      >
         {/* LEFT SIDE */}
         <div className="flex-1 space-y-7">
 
-          {/* Availability badge */}
+          {/* Availability */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -30,7 +38,7 @@ export default function HeroMui() {
             Open to Frontend / Full-Stack roles
           </motion.div>
 
-          {/* HEADLINE */}
+          {/* NAME + ROLE */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -42,22 +50,20 @@ export default function HeroMui() {
             </span>
 
             <span className="mt-3 block bg-gradient-to-r from-sky-400 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">
-              Building Scalable Frontend Systems with React & Java
+              Full Stack Developer • React • Node.js • Core Java
             </span>
           </motion.h1>
 
-          {/* VALUE PROPOSITION */}
+          {/* DESCRIPTION */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-slate-300 max-w-xl text-sm md:text-base leading-relaxed"
           >
-            I design and develop high-performance web applications with clean
-            architecture and production-ready code. Specializing in React,
-            Java, and scalable backend systems, I focus on delivering fast,
-            accessible, and maintainable solutions used in real-world
-            enterprise environments.
+            I build scalable, high-performance web applications with modern
+            frontend systems and robust backend architecture. Focused on clean
+            code, performance optimization, and production-ready solutions.
           </motion.p>
 
           {/* CTA */}
@@ -108,38 +114,23 @@ export default function HeroMui() {
           </motion.div>
         </div>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT SIDE (3D SCENE) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 40 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           className="flex-1 flex justify-center md:justify-end"
         >
-          <div className="relative w-60 h-60 sm:w-72 sm:h-72 rounded-[2rem] bg-gradient-to-br from-sky-500/30 via-slate-900 to-cyan-500/20 p-[2px] shadow-2xl hover:scale-105 transition-transform duration-300">
-
-            <div className="w-full h-full rounded-[1.9rem] bg-slate-950/90 overflow-hidden">
-              <img
-                src="/profile.png"
-                alt={profile.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Floating Badge */}
-            <div className="absolute -bottom-5 left-6 rounded-xl bg-slate-900/90 border border-white/10 px-4 py-2 text-xs text-slate-200 flex items-center gap-2 shadow-lg backdrop-blur">
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
-              Open to React / UI roles
-            </div>
+          <div className="w-[300px] h-[300px] md:w-[420px] md:h-[420px]">
+            <Hero3DScene />
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
 
-/* --------------------------
-   Small Reusable Stat
---------------------------- */
+/* Stat Component */
 function Stat({ value, label }) {
   return (
     <div>

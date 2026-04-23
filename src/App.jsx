@@ -1,37 +1,109 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import Navbar from "./components/NavbarMui";
-import Hero from "./components/HeroMui";
-import About from "./components/About";
-import LiveStats from "./components/LiveStats";
-import Experience from "./components/Experience";
-import Skills from "./components/Skills";
-import AIExpertise from "./components/AIExpertise";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import BackgroundAnimation from "./components/BackgroundAnimation";
+
+// Lazy loaded sections
+const Hero = lazy(() => import("./components/HeroMui"));
+const About = lazy(() => import("./components/About"));
+const LiveStats = lazy(() => import("./components/LiveStats"));
+const Experience = lazy(() => import("./components/Experience"));
+const Skills = lazy(() => import("./components/Skills"));
+const AIExpertise = lazy(() => import("./components/AIExpertise"));
+const Projects = lazy(() => import("./components/Projects"));
+const Contact = lazy(() => import("./components/Contact"));
+const Support = lazy(() => import("./components/Support")); // ✅ added
 
 export default function App() {
   const [messageSentTrigger, setMessageSentTrigger] = useState(false);
 
-  const handleMessageSent = () => setMessageSentTrigger(true);
+  const handleMessageSent = () => {
+    setMessageSentTrigger((prev) => !prev);
+  };
 
   return (
-    <div>
-      <BackgroundAnimation />
+    <div className="relative bg-[#0b0f19] text-white overflow-x-hidden">
 
+      {/* Background */}
+      <div className="fixed inset-0 -z-10">
+        <BackgroundAnimation />
+      </div>
+
+      {/* Navbar */}
       <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <LiveStats messageSentTrigger={messageSentTrigger} />
-        <Experience />
-        <Skills />
-        <AIExpertise />
-        <Projects />
-        <Contact onMessageSent={handleMessageSent} />
+
+      {/* Main */}
+      <main className="flex flex-col gap-24 px-6 md:px-12 lg:px-20">
+
+        <Suspense fallback={<SectionLoader />}>
+
+          <SectionWrapper id="hero">
+            <Hero />
+          </SectionWrapper>
+
+          <SectionWrapper id="about">
+            <About />
+          </SectionWrapper>
+
+          <SectionWrapper id="stats">
+            <LiveStats messageSentTrigger={messageSentTrigger} />
+          </SectionWrapper>
+
+          <SectionWrapper id="experience">
+            <Experience />
+          </SectionWrapper>
+
+          <SectionWrapper id="skills">
+            <Skills />
+          </SectionWrapper>
+
+          <SectionWrapper id="ai">
+            <AIExpertise />
+          </SectionWrapper>
+
+          <SectionWrapper id="projects">
+            <Projects />
+          </SectionWrapper>
+
+          {/* ✅ NEW SUPPORT SECTION */}
+          <SectionWrapper id="support">
+            <Support />
+          </SectionWrapper>
+
+          <SectionWrapper id="contact">
+            <Contact onMessageSent={handleMessageSent} />
+          </SectionWrapper>
+
+        </Suspense>
+
       </main>
+
       <Footer />
+    </div>
+  );
+}
+
+/* Wrapper */
+function SectionWrapper({ children, id }) {
+  return (
+    <section
+      id={id}
+      className="min-h-screen flex items-center justify-center scroll-mt-24"
+    >
+      <div className="w-full max-w-7xl">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+/* Loader */
+function SectionLoader() {
+  return (
+    <div className="h-screen flex items-center justify-center">
+      <div className="animate-pulse text-gray-400 text-lg">
+        Loading experience...
+      </div>
     </div>
   );
 }

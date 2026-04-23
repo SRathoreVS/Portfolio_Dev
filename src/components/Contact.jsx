@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { profile } from "../data/resumeData";
 import emailjs from "@emailjs/browser";
 
@@ -12,7 +13,6 @@ export default function Contact({ onMessageSent }) {
     setLoading(true);
     setStatus({ type: "", message: "" });
 
-    // TODO: replace with your actual EmailJS IDs
     const SERVICE_ID = "your_service_id";
     const TEMPLATE_ID = "your_template_id";
     const PUBLIC_KEY = "your_public_key";
@@ -22,7 +22,7 @@ export default function Contact({ onMessageSent }) {
         setLoading(false);
         setStatus({
           type: "success",
-          message: "Your message has been sent. I’ll get back to you soon!",
+          message: "Message sent successfully 🚀",
         });
 
         formRef.current.reset();
@@ -32,118 +32,138 @@ export default function Contact({ onMessageSent }) {
         setLoading(false);
         setStatus({
           type: "error",
-          message: "Something went wrong. Please try again in a moment.",
+          message: "Something went wrong. Try again.",
         });
       }
     );
   };
 
   return (
-    <section id="contact" className="max-w-6xl mx-auto px-4 py-20">
-      <div className="grid md:grid-cols-2 gap-10 items-start">
-        {/* Left: text / info */}
-        <div className="space-y-4">
-          <h2 className="text-3xl font-semibold gradient-text">
-            Let&apos;s work together
+    <section id="contact" className="max-w-7xl mx-auto px-4 py-24">
+
+      <div className="grid md:grid-cols-2 gap-12 items-start">
+
+        {/* LEFT SIDE */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="space-y-6"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            Let’s Build Something Great Together
           </h2>
-          <p className="text-slate-300 text-sm md:text-base">
-            Open to frontend-heavy roles, React projects, and UI engineering
-            work. If you have an idea, a product, or a team that needs a
-            frontend specialist, feel free to reach out.
+
+          <p className="text-slate-300 leading-relaxed">
+            I specialize in building scalable frontend systems and full-stack
+            applications using React and Java. If you’re looking for someone who
+            can deliver clean, performant, and production-ready solutions —
+            let’s connect.
           </p>
 
-          <div className="space-y-2 text-sm text-slate-300">
-            <div>
-              <span className="font-semibold text-sky-300">Email: </span>
+          {/* CONTACT INFO */}
+          <div className="space-y-3 text-sm">
+            <p className="text-slate-300">
+              <span className="text-sky-300 font-medium">Email:</span>{" "}
               <a
                 href={`mailto:${profile.email}`}
-                className="underline hover:text-sky-200"
+                className="hover:text-sky-200 transition"
               >
                 {profile.email}
               </a>
-            </div>
-            <div>
-              <span className="font-semibold text-sky-300">LinkedIn: </span>
+            </p>
+
+            <p className="text-slate-300">
+              <span className="text-sky-300 font-medium">LinkedIn:</span>{" "}
               <a
                 href={profile.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="underline hover:text-sky-200"
+                className="hover:text-sky-200 transition"
               >
-                View profile
+                View Profile →
               </a>
-            </div>
-            <div>
-              <span className="font-semibold text-sky-300">Location: </span>
-              {profile.location}
-            </div>
-          </div>
-        </div>
+            </p>
 
-        {/* Right: form */}
-        <div className="glass-card rounded-2xl p-6 shadow-xl">
-          <h3 className="text-lg font-semibold mb-4 text-white">
-            Send me a message
+            <p className="text-slate-300">
+              <span className="text-sky-300 font-medium">Location:</span>{" "}
+              {profile.location}
+            </p>
+          </div>
+        </motion.div>
+
+        {/* RIGHT SIDE (FORM) */}
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="rounded-2xl border border-white/10 bg-slate-950/70 backdrop-blur p-8 shadow-xl"
+        >
+          <h3 className="text-lg font-semibold mb-6 text-white">
+            Send a Message
           </h3>
 
-          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+
+            {/* NAME */}
             <div>
-              <label className="block text-sm text-slate-300 mb-1">
-                Your Name
-              </label>
+              <label className="text-sm text-slate-400">Your Name</label>
               <input
                 type="text"
                 name="user_name"
                 required
-                className="w-full px-3 py-2 rounded-lg border border-white/10 bg-slate-900/80 text-sm text-white outline-none focus:border-sky-400"
+                className="w-full mt-1 px-4 py-2.5 rounded-lg border border-white/10 bg-slate-900 text-white focus:border-sky-400 outline-none transition"
               />
             </div>
 
+            {/* EMAIL */}
             <div>
-              <label className="block text-sm text-slate-300 mb-1">
-                Your Email
-              </label>
+              <label className="text-sm text-slate-400">Your Email</label>
               <input
                 type="email"
                 name="user_email"
                 required
-                className="w-full px-3 py-2 rounded-lg border border-white/10 bg-slate-900/80 text-sm text-white outline-none focus:border-sky-400"
+                className="w-full mt-1 px-4 py-2.5 rounded-lg border border-white/10 bg-slate-900 text-white focus:border-sky-400 outline-none transition"
               />
             </div>
 
+            {/* MESSAGE */}
             <div>
-              <label className="block text-sm text-slate-300 mb-1">
-                Message
-              </label>
+              <label className="text-sm text-slate-400">Message</label>
               <textarea
                 name="message"
                 rows="4"
                 required
-                className="w-full px-3 py-2 rounded-lg border border-white/10 bg-slate-900/80 text-sm text-white outline-none focus:border-sky-400 resize-none"
+                className="w-full mt-1 px-4 py-2.5 rounded-lg border border-white/10 bg-slate-900 text-white focus:border-sky-400 outline-none transition resize-none"
               />
             </div>
 
+            {/* BUTTON */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-400 text-slate-950 text-sm font-semibold px-4 py-2.5 hover:shadow-lg hover:shadow-sky-500/30 disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+              className="w-full rounded-full bg-gradient-to-r from-sky-500 to-cyan-400 text-black font-semibold py-3 hover:shadow-lg hover:shadow-sky-500/30 transition disabled:opacity-60"
             >
               {loading ? "Sending..." : "Send Message"}
             </button>
           </form>
 
+          {/* STATUS */}
           {status.message && (
-            <div
-              className={`mt-4 text-sm rounded-lg px-3 py-2 ${
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`mt-5 text-sm px-4 py-2 rounded-lg ${
                 status.type === "success"
-                  ? "bg-emerald-500/10 text-emerald-300 border border-emerald-500/40"
-                  : "bg-red-500/10 text-red-300 border border-red-500/40"
+                  ? "bg-emerald-500/10 text-emerald-300 border border-emerald-400/30"
+                  : "bg-red-500/10 text-red-300 border border-red-400/30"
               }`}
             >
               {status.message}
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
+
       </div>
     </section>
   );

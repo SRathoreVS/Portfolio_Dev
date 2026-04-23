@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function Support() {
-  const upiId = "yourupi@okaxis"; // 🔴 replace with your UPI
+  const upiId = "yourp6394614898@pthdfc"; 
 
   const [copied, setCopied] = useState(false);
 
@@ -32,7 +32,7 @@ export default function Support() {
         {/* QR Code */}
         <div className="mt-6 flex justify-center">
           <img
-            src="/upi-qr.png" // 🔴 add your QR image in public folder
+            src="/QR.jpg" 
             alt="UPI QR"
             className="w-48 h-48 rounded-xl border border-white/10"
           />

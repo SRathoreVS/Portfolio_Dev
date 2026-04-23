@@ -6,7 +6,6 @@ import BackgroundAnimation from "./components/BackgroundAnimation";
 // Lazy loaded sections
 const Hero = lazy(() => import("./components/HeroMui"));
 const About = lazy(() => import("./components/About"));
-const LiveStats = lazy(() => import("./components/LiveStats"));
 const Experience = lazy(() => import("./components/Experience"));
 const Skills = lazy(() => import("./components/Skills"));
 const AIExpertise = lazy(() => import("./components/AIExpertise"));

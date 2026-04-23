@@ -1,7 +1,6 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { profile } from "../data/resumeData";
-import Hero3DScene from "./Hero3DScene";
 
 export default function HeroMui() {
   const { scrollY } = useScroll();
@@ -121,8 +120,8 @@ export default function HeroMui() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="flex-1 flex justify-center md:justify-end"
         >
-          <div className="w-[300px] h-[300px] md:w-[420px] md:h-[420px]">
-            <Hero3DScene />
+          <div className="rounded w-[200px] h-[200px] md:w-[420px] md:h-[420px] rounded-2xl">
+            <img src="/profile.jpeg" alt="profile" />
           </div>
         </motion.div>
       </motion.div>

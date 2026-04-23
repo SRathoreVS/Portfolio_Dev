@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function Experience() {
   return (
-    <section id="experience" className="max-w-7xl mx-auto px-4 py-24">
+    <section id="experience" className="max-w-7xl mx-auto px-4 ">
 
       {/* HEADER */}
       <motion.div

@@ -215,4 +215,24 @@ export const projects = [
     live: "https://rathore-dice-winwin.netlify.app/",
     image: "/projects/winwin-dice.png",
   },
+  {
+  name: "Perch Wine & Coffee Bar",
+  tagline: "Premium restaurant & cafe web experience",
+
+  problem:
+    "Many restaurant websites feel outdated, lack visual storytelling, and fail to create an immersive digital dining experience.",
+
+  solution:
+    "Designed and developed a modern luxury-inspired website with cinematic visuals, smooth animations, responsive layouts, and an engaging user experience tailored for a wine & coffee bar brand.",
+
+  impact: [
+    "Enhanced premium brand presentation",
+    "Improved user engagement with interactive UI",
+    "Responsive and visually immersive browsing experience",
+  ],
+
+  tech: ["React.js", "Tailwind CSS", "JavaScript", "Framer Motion", "Vite"],
+  live: "https://perch-wine-coffee-bar.netlify.app/",
+  image: "/projects/perch-wine-coffee-bar.png",
+},
 ];

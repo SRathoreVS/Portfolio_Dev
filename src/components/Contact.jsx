@@ -3,9 +3,10 @@ import { motion } from "framer-motion";
 import { profile } from "../data/resumeData";
 import emailjs from "@emailjs/browser";
 
-const SERVICE_ID   = "service_7d3mkf9";
-const TEMPLATE_ID  = "template_gx3c0dm";
-const PUBLIC_KEY   = "SAqxCqiMlUDgWe0r8";
+/* ── EmailJS v4 config ── */
+const SERVICE_ID  = "service_7d3mkf9";
+const TEMPLATE_ID = "template_gx3c0dm";
+const PUBLIC_KEY  = "SAqxCqiMlUDgWe0r8";
 
 const CONTACT_LINKS = [
   {
@@ -52,25 +53,39 @@ const CONTACT_LINKS = [
 
 export default function Contact({ onMessageSent }) {
   const formRef = useRef(null);
+  const [fields, setFields] = useState({ user_name: "", user_email: "", subject: "", message: "" });
   const [status, setStatus]   = useState({ type: "", message: "" });
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setStatus({ type: "", message: "" });
 
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
-      .then(() => {
-        setLoading(false);
-        setStatus({ type: "success", message: "Message sent! I'll reply within 24 hours 🚀" });
-        formRef.current.reset();
-        if (onMessageSent) onMessageSent();
-      })
-      .catch(() => {
-        setLoading(false);
-        setStatus({ type: "error", message: "Something went wrong. Try emailing directly." });
+    try {
+      /* EmailJS v4 — init once then send */
+      emailjs.init({ publicKey: PUBLIC_KEY });
+
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+        user_name:  fields.user_name,
+        user_email: fields.user_email,
+        subject:    fields.subject || "Portfolio Contact",
+        message:    fields.message,
       });
+
+      setLoading(false);
+      setStatus({ type: "success", message: "Message sent! I'll reply within 24 hours 🚀" });
+      setFields({ user_name: "", user_email: "", subject: "", message: "" });
+      if (onMessageSent) onMessageSent();
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setLoading(false);
+      setStatus({ type: "error", message: "Something went wrong. Please email directly at priyasatyam1806@gmail.com" });
+    }
   };
 
   return (
@@ -96,40 +111,37 @@ export default function Contact({ onMessageSent }) {
         <motion.div
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }} viewport={{ once: true }}
-          className="lg:col-span-2 space-y-6"
+          className="lg:col-span-2 space-y-4"
         >
-          <div className="space-y-4">
-            {CONTACT_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel="noreferrer"
-                className="flex items-center gap-4 glass rounded-xl p-4 group transition-all hover:-translate-y-0.5 hover:shadow-glow-sm"
-              >
-                <div className="w-9 h-9 rounded-lg flex items-center justify-center text-violet-300 flex-shrink-0"
-                  style={{ background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.25)' }}>
-                  {link.icon}
-                </div>
-                <div className="min-w-0">
-                  <div className="text-xs text-slate-500">{link.label}</div>
-                  <div className="text-sm text-slate-200 group-hover:text-violet-300 transition-colors truncate">{link.value}</div>
-                </div>
-                <svg className="w-4 h-4 text-slate-600 group-hover:text-violet-400 ml-auto flex-shrink-0 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-            ))}
-          </div>
+          {CONTACT_LINKS.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel="noreferrer"
+              className="flex items-center gap-4 glass rounded-xl p-4 group transition-all hover:-translate-y-0.5 hover:shadow-glow-sm"
+            >
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center text-violet-300 flex-shrink-0"
+                style={{ background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.25)' }}>
+                {link.icon}
+              </div>
+              <div className="min-w-0">
+                <div className="text-xs text-slate-500">{link.label}</div>
+                <div className="text-sm text-slate-200 group-hover:text-violet-300 transition-colors truncate">{link.value}</div>
+              </div>
+              <svg className="w-4 h-4 text-slate-600 group-hover:text-violet-400 ml-auto flex-shrink-0 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          ))}
 
-          {/* Availability card */}
-          <div className="glass-strong rounded-xl p-5">
+          <div className="glass-strong rounded-xl p-5 mt-2">
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-sm font-semibold text-emerald-300">Available Now</span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Open to full-time, contract, and remote Full-Stack roles. 
+              Open to full-time, contract, and remote Full-Stack roles.
               Based in Mumbai — open to relocation & remote globally.
             </p>
           </div>
@@ -144,13 +156,15 @@ export default function Contact({ onMessageSent }) {
           <div className="glass-strong rounded-2xl p-6 sm:p-8">
             <h3 className="text-base font-semibold text-slate-100 mb-6">Send a Message</h3>
 
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs text-slate-500 mb-1.5 font-medium">Your Name *</label>
                   <input
                     type="text"
                     name="user_name"
+                    value={fields.user_name}
+                    onChange={handleChange}
                     required
                     placeholder="John Doe"
                     className="form-input"
@@ -161,6 +175,8 @@ export default function Contact({ onMessageSent }) {
                   <input
                     type="email"
                     name="user_email"
+                    value={fields.user_email}
+                    onChange={handleChange}
                     required
                     placeholder="john@company.com"
                     className="form-input"
@@ -173,6 +189,8 @@ export default function Contact({ onMessageSent }) {
                 <input
                   type="text"
                   name="subject"
+                  value={fields.subject}
+                  onChange={handleChange}
                   placeholder="Job opportunity / Project collaboration"
                   className="form-input"
                 />
@@ -182,6 +200,8 @@ export default function Contact({ onMessageSent }) {
                 <label className="block text-xs text-slate-500 mb-1.5 font-medium">Message *</label>
                 <textarea
                   name="message"
+                  value={fields.message}
+                  onChange={handleChange}
                   rows={5}
                   required
                   placeholder="Tell me about the role or project..."
@@ -213,19 +233,18 @@ export default function Contact({ onMessageSent }) {
               </button>
             </form>
 
-            {/* Status message */}
             {status.message && (
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`mt-4 text-sm px-4 py-3 rounded-xl border flex items-center gap-2 ${
+                className={`mt-4 text-sm px-4 py-3 rounded-xl border flex items-start gap-2 ${
                   status.type === "success"
                     ? "bg-emerald-500/10 text-emerald-300 border-emerald-400/25"
                     : "bg-red-500/10 text-red-300 border-red-400/25"
                 }`}
               >
-                <span>{status.type === "success" ? "✅" : "⚠️"}</span>
-                {status.message}
+                <span className="flex-shrink-0 mt-0.5">{status.type === "success" ? "✅" : "⚠️"}</span>
+                <span>{status.message}</span>
               </motion.div>
             )}
           </div>

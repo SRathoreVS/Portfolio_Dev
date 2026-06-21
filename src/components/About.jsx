@@ -1,90 +1,123 @@
-import { profile } from "../data/resumeData";
+import React from "react";
 import { motion } from "framer-motion";
+import { profile } from "../data/resumeData";
+
+const HIGHLIGHTS = [
+  { icon: "🏦", label: "Domain", value: "Fintech & Banking" },
+  { icon: "🎓", label: "Education", value: "B.Tech · KIIT · 8.1 CGPA" },
+  { icon: "📍", label: "Based In", value: "Mumbai, India" },
+  { icon: "✉️", label: "Email", value: profile.email, link: `mailto:${profile.email}` },
+];
+
+const CORE_VALUES = [
+  { title: "Performance First", desc: "35–50% perf gains through memoization, lazy loading & code splitting." },
+  { title: "Test Coverage", desc: "85%+ unit/integration coverage with Jest, Vitest & Playwright." },
+  { title: "Clean Architecture", desc: "Micro-frontend, Module Federation & domain-driven design patterns." },
+  { title: "WCAG Compliant", desc: "Accessibility-first approach across all projects." },
+];
 
 export default function About() {
   return (
-    <section id="about" className="max-w-6xl mx-auto px-4 ">
-      <motion.h2
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-3xl font-semibold gradient-text mb-12 text-center"
+    <section id="about" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }} viewport={{ once: true }}
+        className="mb-12 text-center"
       >
-        About Me
-      </motion.h2>
+        <p className="section-eyebrow mb-3">About Me</p>
+        <h2 className="text-3xl sm:text-4xl font-bold text-slate-100">
+          Crafting scalable products{" "}
+          <span className="gradient-text">with purpose</span>
+        </h2>
+      </motion.div>
 
-      <div className="grid md:grid-cols-3 gap-10">
-        {/* Main bio */}
+      <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start">
+
+        {/* Bio — 3 cols */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="md:col-span-2 space-y-4 text-slate-300 text-sm md:text-base"
+          initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }} viewport={{ once: true }}
+          className="lg:col-span-3 space-y-5 text-slate-300 text-sm sm:text-base leading-relaxed"
         >
           <p>
-            🚀 Full-Stack Web Developer | React.js & Java | with 4.5 years of experience building and maintaining scalable web applications using Java, Spring Boot, React.js, and RESTful APIs. Hands-on in developing secure and high-performing systems across both frontend and backend layers. Experienced in microservices, JWT authentication, and CI/CD pipelines. Skilled in Java-based backend development, API integration, and frontend architecture with React.js and TypeScript. Adept at Agile collaboration and currently enhancing expertise in Java and backend frameworks.
+            Full-Stack Developer with <strong className="text-violet-300">4.5+ years</strong> of experience 
+            delivering production-grade web applications across fintech & banking 
+            for industry leaders including <strong className="text-slate-100">Infosys (UBS)</strong>, 
+            <strong className="text-slate-100"> Accenture (OP Bank)</strong>, and 
+            <strong className="text-slate-100"> TCS (Nordea Bank)</strong>.
+          </p>
+          <p>
+            I specialize in React.js micro-frontend architecture, GraphQL + REST APIs, NestJS backends, 
+            and automated CI/CD pipelines. My approach blends strong engineering fundamentals with an 
+            eye for UX — turning complex requirements into clean, accessible, and maintainable experiences.
+          </p>
+          <p>
+            Currently at Infosys, I led a migration from a monolithic UBS banking platform to a modular 
+            React + Module Federation architecture, reducing feature delivery time by <strong className="text-violet-300">40%</strong> 
+            and improving app performance by up to <strong className="text-violet-300">50%</strong>.
           </p>
 
-          <p>
-            I focus on creating modular, reusable UI components and seamless
-            user journeys with a strong emphasis on API integration,
-            authentication flows, accessibility (WCAG 2.1), performance
-            optimization, and CI/CD pipelines. I enjoy translating complex
-            requirements into simple, usable experiences while collaborating
-            closely with designers, backend engineers, and stakeholders.
-          </p>
-
-          <p>
-            I am comfortable working in Agile environments, using cloud and
-            DevOps tools, and writing scalable, testable code. Currently, I am
-            improving my problem-solving skills through Data Structures and
-            Algorithms (DSA) in Java and strengthening my Core Java knowledge.
-          </p>
+          {/* Values grid */}
+          <div className="grid sm:grid-cols-2 gap-4 mt-6">
+            {CORE_VALUES.map((v, i) => (
+              <motion.div
+                key={v.title}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                viewport={{ once: true }}
+                className="glass rounded-xl p-4"
+              >
+                <h4 className="text-sm font-semibold text-violet-300 mb-1">{v.title}</h4>
+                <p className="text-xs text-slate-400 leading-relaxed">{v.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Compact info column (no CTA buttons here) */}
+        {/* Info card — 2 cols */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="glass-card p-6 rounded-2xl flex flex-col gap-3 text-sm text-slate-200"
+          initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }} viewport={{ once: true }}
+          className="lg:col-span-2"
         >
-          <h3 className="text-lg font-semibold mb-1">Quick details</h3>
-          <div className="space-y-2">
-            <div>
-              <span className="font-semibold text-sky-300">Name: </span>
-              {profile.name}
-            </div>
-            <div>
-              <span className="font-semibold text-sky-300">Role: </span>
-              {profile.role}
-            </div>
-            <div>
-              <span className="font-semibold text-sky-300">Experience: </span>
-               4.5+ years
-            </div>
-            <div>
-              <span className="font-semibold text-sky-300">Location: </span>
-              {profile.location}
-            </div>
-            <div>
-              <span className="font-semibold text-sky-300">Phone: </span>
-              {profile.phone}
-            </div>
-            <div>
-              <span className="font-semibold text-sky-300">Email: </span>
+          <div className="glass-strong rounded-2xl p-6 space-y-4">
+            <h3 className="text-sm font-semibold text-slate-100 mb-4">Quick Details</h3>
+            {HIGHLIGHTS.map((h) => (
+              <div key={h.label} className="flex items-start gap-3 text-sm">
+                <span className="text-lg mt-0.5">{h.icon}</span>
+                <div>
+                  <div className="text-xs text-slate-500 mb-0.5">{h.label}</div>
+                  {h.link ? (
+                    <a href={h.link} className="text-slate-200 hover:text-violet-300 transition-colors break-all">
+                      {h.value}
+                    </a>
+                  ) : (
+                    <div className="text-slate-200">{h.value}</div>
+                  )}
+                </div>
+              </div>
+            ))}
+
+            <div className="border-t border-violet-500/10 pt-4 mt-2">
               <a
-                href={`mailto:${profile.email}`}
-                className="underline hover:text-sky-200"
+                href={profile.linkedin}
+                target="_blank" rel="noreferrer"
+                className="btn-primary w-full text-center block"
               >
-                {profile.email}
+                Connect on LinkedIn →
               </a>
             </div>
+
+            <a
+              href="/SatyamRathore_Resume.pdf"
+              download
+              className="btn-outline w-full text-center block"
+            >
+              Download Resume
+            </a>
           </div>
-          <p className="mt-3 text-xs text-slate-400">
-            For opportunities and collaborations, you can use the contact form
-            or reach out on LinkedIn from the hero section.
-          </p>
         </motion.div>
       </div>
     </section>

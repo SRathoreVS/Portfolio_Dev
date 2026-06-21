@@ -1,62 +1,70 @@
 import React, { useEffect, useState } from "react";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import ChatIcon from "@mui/icons-material/Chat";
-import CodeIcon from "@mui/icons-material/Code";
+import { motion } from "framer-motion";
 
-export default function LiveStats({ messageSentTrigger }) {
-  const [pageViews, setPageViews] = useState(0);
-  const [messagesSent, setMessagesSent] = useState(0);
-  const [linesOfCode] = useState(125000);
+/* ─────────────────────────────────────────
+   Live page-view counter using a free
+   countapi (goatcounter-inspired approach).
+   Falls back to localStorage for offline.
+───────────────────────────────────────── */
 
-  // Load initial data from localStorage
-  useEffect(() => {
-    const storedViews = parseInt(localStorage.getItem("pageViews") || "0");
-    const storedMessages = parseInt(
-      localStorage.getItem("messagesSent") || "0"
+const NAMESPACE = "satyam-rathore-portfolio";
+const KEY = "pageviews";
+
+async function fetchAndIncrementViews() {
+  try {
+    // Using countapi.xyz – free, no auth needed
+    const res = await fetch(
+      `https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`
     );
+    if (!res.ok) throw new Error("countapi fail");
+    const data = await res.json();
+    return data.value;
+  } catch {
+    // Graceful fallback: use localStorage
+    const stored = parseInt(localStorage.getItem("portfolio_views") || "0", 10);
+    const next = stored + 1;
+    localStorage.setItem("portfolio_views", String(next));
+    return next;
+  }
+}
 
-    // Increment page views
-    const newViews = storedViews + 1;
-    setPageViews(newViews);
-    setMessagesSent(storedMessages);
+export function usePageViews() {
+  const [views, setViews] = useState(null);
 
-    localStorage.setItem("pageViews", newViews.toString());
-    localStorage.setItem("messagesSent", storedMessages.toString());
+  useEffect(() => {
+    fetchAndIncrementViews().then(setViews);
   }, []);
 
-  // Increment messages sent when trigger changes
-  useEffect(() => {
-    if (messageSentTrigger) {
-      const storedMessages = parseInt(
-        localStorage.getItem("messagesSent") || "0"
-      );
-      const newMessages = storedMessages + 1;
-      setMessagesSent(newMessages);
-      localStorage.setItem("messagesSent", newMessages.toString());
-    }
-  }, [messageSentTrigger]);
+  return views;
+}
+
+export default function LiveStats({ views }) {
+  const stats = [
+    { value: "4.5+", label: "Years Exp." },
+    { value: "10+",  label: "Projects" },
+    { value: "85%+", label: "Test Coverage" },
+    { value: views != null ? views.toLocaleString() : "—", label: "Page Views", live: true },
+  ];
 
   return (
-    <section id="livestats" className="max-w-6xl mx-auto px-4 py-16">
-      <div className="rounded-2xl border border-white/10 p-5 bg-white/5 card-hover flex justify-between text-center">
-        <div className="flex flex-col items-center gap-2 text-slate-400 dark:text-slate-300">
-          <VisibilityIcon className="text-sky-500 animate-bounce" />
-          <span className="font-semibold">{pageViews}</span>
-          <span>Page Views</span>
-        </div>
-
-        <div className="flex flex-col items-center gap-2 text-slate-400 dark:text-slate-300">
-          <ChatIcon className="text-green-500 animate-pulse" />
-          <span className="font-semibold">{messagesSent}</span>
-          <span>Messages Sent</span>
-        </div>
-
-        <div className="flex flex-col items-center gap-2 text-slate-400 dark:text-slate-300">
-          <CodeIcon className="text-indigo-500 animate-spin-slow" />
-          <span className="font-semibold">{linesOfCode.toLocaleString()}</span>
-          <span>Lines of Code</span>
-        </div>
-      </div>
-    </section>
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+      {stats.map((s, i) => (
+        <motion.div
+          key={s.label}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
+          className="glass rounded-2xl p-4 text-center"
+        >
+          <div className="flex items-center justify-center gap-1.5 mb-1">
+            {s.live && (
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            )}
+            <span className="text-xl font-bold gradient-text">{s.value}</span>
+          </div>
+          <div className="text-xs text-slate-500 font-medium">{s.label}</div>
+        </motion.div>
+      ))}
+    </div>
   );
 }

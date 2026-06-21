@@ -7,7 +7,6 @@ const NAV_ITEMS = [
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
-  { label: "Support", href: "#support" }
 ];
 
 export default function NavbarMui() {
@@ -15,39 +14,27 @@ export default function NavbarMui() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("#hero");
 
-  /* --------------------------
-     Scroll Detection (Improved)
-  --------------------------- */
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-
       const sections = document.querySelectorAll("section[id]");
       let current = "#hero";
-
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
         if (rect.top <= 120 && rect.bottom >= 120) {
           current = `#${section.id}`;
         }
       });
-
       setActive(current);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* --------------------------
-     Smooth Scroll
-  --------------------------- */
   const handleNavClick = (href) => {
     setIsOpen(false);
     const el = document.querySelector(href);
-
     if (el) {
       const y = el.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top: y, behavior: "smooth" });
@@ -58,99 +45,99 @@ export default function NavbarMui() {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "backdrop-blur-xl bg-slate-950/70 border-b border-white/10 shadow-lg"
+          ? "border-b border-violet-500/10 shadow-glow-sm"
           : "bg-transparent"
       }`}
+      style={scrolled ? { background: 'rgba(7,8,15,0.85)', backdropFilter: 'blur(24px)' } : {}}
     >
-      <nav className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-
-        {/* LOGO */}
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+        {/* Logo */}
         <motion.button
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.03 }}
           onClick={() => handleNavClick("#hero")}
-          className="text-lg font-bold tracking-tight bg-gradient-to-r from-sky-400 to-cyan-300 bg-clip-text text-transparent"
+          className="text-base font-bold tracking-tight gradient-text"
         >
-          Satyam.dev
+          SR.dev
         </motion.button>
 
-        {/* DESKTOP NAV */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
           {NAV_ITEMS.map((item) => (
             <button
               key={item.href}
               onClick={() => handleNavClick(item.href)}
-              className={`relative text-sm font-medium transition-colors ${
+              className={`relative text-sm font-medium transition-colors duration-200 ${
                 active === item.href
-                  ? "text-sky-300"
-                  : "text-slate-300 hover:text-white"
+                  ? "text-violet-300"
+                  : "text-slate-400 hover:text-slate-100"
               }`}
             >
               {item.label}
-
-              {/* Animated underline */}
               {active === item.href && (
                 <motion.span
                   layoutId="nav-underline"
-                  className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gradient-to-r from-sky-400 to-cyan-300 rounded-full"
+                  className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full"
+                  style={{ background: 'linear-gradient(90deg, #7c3aed, #c084fc)' }}
                 />
               )}
             </button>
           ))}
-
-          {/* CTA */}
           <motion.a
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.03 }}
             href="#contact"
-            className="ml-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-400 text-slate-950 text-sm font-semibold px-5 py-2 shadow-lg hover:shadow-sky-500/40 transition"
+            onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
+            className="btn-primary ml-2"
           >
             Hire Me
           </motion.a>
         </div>
 
-        {/* MOBILE BUTTON */}
+        {/* Mobile Menu Button */}
         <button
-          className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/15 bg-slate-900/70"
+          className="md:hidden flex flex-col gap-1.5 w-10 h-10 items-center justify-center rounded-xl border border-violet-500/20 bg-violet-950/40"
           onClick={() => setIsOpen((o) => !o)}
+          aria-label="Toggle menu"
         >
-          <div className="space-y-1.5">
-            <span className="block w-4 h-0.5 bg-white" />
-            <span className="block w-4 h-0.5 bg-white" />
-          </div>
+          <span className={`block w-5 h-0.5 bg-slate-300 transition-all ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
+          <span className={`block w-5 h-0.5 bg-slate-300 transition-all ${isOpen ? 'opacity-0' : ''}`} />
+          <span className={`block w-5 h-0.5 bg-slate-300 transition-all ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
         </button>
       </nav>
 
-      {/* MOBILE MENU */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-xl"
+            className="md:hidden overflow-hidden border-t border-violet-500/10"
+            style={{ background: 'rgba(7,8,15,0.97)', backdropFilter: 'blur(24px)' }}
           >
-            <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-3">
+            <div className="max-w-7xl mx-auto px-4 py-5 flex flex-col gap-1">
               {NAV_ITEMS.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => handleNavClick(item.href)}
-                  className={`text-left py-2 text-sm ${
+                  className={`text-left py-3 px-4 rounded-xl text-sm font-medium transition-all ${
                     active === item.href
-                      ? "text-sky-300 font-semibold"
-                      : "text-slate-300"
+                      ? "text-violet-300 bg-violet-500/10"
+                      : "text-slate-400 hover:text-slate-100 hover:bg-white/5"
                   }`}
                 >
                   {item.label}
                 </button>
               ))}
-
-              <a
-                href="#contact"
-                onClick={() => setIsOpen(false)}
-                className="mt-3 inline-flex justify-center rounded-full bg-gradient-to-r from-sky-500 to-cyan-400 text-slate-950 text-sm font-semibold px-4 py-2"
-              >
-                Hire Me
-              </a>
+              <div className="pt-3 border-t border-violet-500/10 mt-2">
+                <a
+                  href="#contact"
+                  onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
+                  className="btn-primary w-full text-center block"
+                >
+                  Hire Me
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

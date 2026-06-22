@@ -1,7 +1,9 @@
 import React, { useState, lazy, Suspense } from "react";
+import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/NavbarMui";
 import Footer from "./components/Footer";
 import BackgroundAnimation from "./components/BackgroundAnimation";
+import GamesPage from "./pages/GamesPage";
 
 const Hero       = lazy(() => import("./components/HeroMui"));
 const About      = lazy(() => import("./components/About"));
@@ -11,36 +13,31 @@ const Projects   = lazy(() => import("./components/Projects"));
 const Contact    = lazy(() => import("./components/Contact"));
 
 export default function App() {
-  const [messageSentTrigger, setMessageSentTrigger] = useState(false);
+  const [showGames, setShowGames] = useState(false);
 
   return (
     <div className="relative bg-[#07080f] text-white overflow-x-hidden min-h-screen">
       <BackgroundAnimation />
-      <Navbar />
+      <Navbar onPlayClick={() => setShowGames(true)} />
 
       <main>
         <Suspense fallback={<SectionLoader />}>
-          <SectionWrapper id="hero">    <Hero /> </SectionWrapper>
-          <SectionWrapper id="about">   <About /> </SectionWrapper>
-          <SectionWrapper id="experience"> <Experience /> </SectionWrapper>
-          <SectionWrapper id="skills">  <Skills /> </SectionWrapper>
-          <SectionWrapper id="projects"><Projects /> </SectionWrapper>
-          <SectionWrapper id="contact">
-            <Contact onMessageSent={() => setMessageSentTrigger((p) => !p)} />
-          </SectionWrapper>
+          <section id="hero"       className="py-0">          <Hero /> </section>
+          <section id="about"      className="py-20 sm:py-24"><About /> </section>
+          <section id="experience" className="py-20 sm:py-24"><Experience /> </section>
+          <section id="skills"     className="py-20 sm:py-24"><Skills /> </section>
+          <section id="projects"   className="py-20 sm:py-24"><Projects /> </section>
+          <section id="contact"    className="py-20 sm:py-24"><Contact /> </section>
         </Suspense>
       </main>
 
       <Footer />
-    </div>
-  );
-}
 
-function SectionWrapper({ children, id }) {
-  return (
-    <section id={id} className="py-20 sm:py-24">
-      <div className="w-full">{children}</div>
-    </section>
+      {/* Games overlay */}
+      <AnimatePresence>
+        {showGames && <GamesPage onClose={() => setShowGames(false)} />}
+      </AnimatePresence>
+    </div>
   );
 }
 

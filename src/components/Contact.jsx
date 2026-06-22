@@ -6,7 +6,7 @@ import emailjs from "@emailjs/browser";
 /* ── EmailJS v4 config ── */
 const SERVICE_ID  = "service_7d3mkf9";
 const TEMPLATE_ID = "template_gx3c0dm";
-const PUBLIC_KEY  = "SAqxCqiMlUDgWe0r8";
+const PUBLIC_KEY  = "sAqxCqiMIUDgWe0r8";
 
 const CONTACT_LINKS = [
   {
